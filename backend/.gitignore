@@ -2,6 +2,7 @@
 /dist
 /node_modules
 /build
+/generated
 
 # Logs
 logs
@@ -23,7 +24,7 @@ lerna-debug.log*
 /.idea
 .project
 .classpath
-.c9/
+.c9/git reset
 *.launch
 .settings/
 *.sublime-workspace

@@ -1,0 +1,55 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  name      String?
+  password  String
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  // Relations
+  accounts  Account[]
+}
+
+model Account {
+  id            String   @id @default(uuid())
+  titular       String
+  tipo          String   // 'CORRENTE' | 'POUPANCA'
+  saldoCentavos Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relation to User
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id])
+
+  // Relations
+  transactions          Transaction[] @relation("AccountTransactions")
+  relatedTransactions   Transaction[] @relation("RelatedTransactions")
+}
+
+model Transaction {
+  id                 String   @id @default(uuid())
+  accountId          String
+  tipo               String   // 'SAQUE' | 'TRANSFERENCIA_ENVIADA' | 'TRANSFERENCIA_RECEBIDA'
+  valorCentavos      Int
+  tarifaCentavos     Int
+  saldoApos          Int
+  contaRelacionadaId String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  // Relations
+  account          Account  @relation("AccountTransactions", fields: [accountId], references: [id])
+  contaRelacionada Account? @relation("RelatedTransactions", fields: [contaRelacionadaId], references: [id])
+}
