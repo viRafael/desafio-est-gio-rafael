@@ -8,14 +8,14 @@ datasource db {
 }
 
 enum AccountType {
-  CORRENTE
-  POUPANCA
+  CHECKING
+  SAVINGS
 }
 
 enum TransactionType {
-  SAQUE
-  TRANSFERENCIA_ENVIADA
-  TRANSFERENCIA_RECEBIDA
+  WITHDRAWAL
+  TRANSFER_SENT
+  TRANSFER_RECEIVED
 }
 
 model User {
@@ -33,12 +33,12 @@ model User {
 }
 
 model Account {
-  id            String      @id @default(uuid())
-  titular       String
-  tipo          AccountType
-  saldoCentavos Int
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  id             String      @id @default(uuid())
+  holder         String
+  type           AccountType
+  balanceInCents Int
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
 
   // Relation to User
   userId String?
@@ -50,17 +50,17 @@ model Account {
 }
 
 model Transaction {
-  id                 String          @id @default(uuid())
-  accountId          String
-  tipo               TransactionType
-  valorCentavos      Int
-  tarifaCentavos     Int
-  saldoApos          Int
-  contaRelacionadaId String?
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
+  id               String          @id @default(uuid())
+  accountId        String
+  type             TransactionType
+  amountInCents    Int
+  feeInCents       Int
+  balanceAfter     Int
+  relatedAccountId String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 
   // Relations
-  account          Account  @relation("AccountTransactions", fields: [accountId], references: [id])
-  contaRelacionada Account? @relation("RelatedTransactions", fields: [contaRelacionadaId], references: [id])
+  account        Account  @relation("AccountTransactions", fields: [accountId], references: [id])
+  relatedAccount Account? @relation("RelatedTransactions", fields: [relatedAccountId], references: [id])
 }
