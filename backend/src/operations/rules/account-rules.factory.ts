@@ -3,7 +3,7 @@ import { AccountRules } from './account-rules.interface';
 import { CheckingAccountRules } from './checking-account-rules';
 import { SavingsAccountRules } from './savings-account-rules';
 import { InvalidAccountException } from '../../common/exceptions/invalid-account.exception';
-import { AccountType } from 'generated/client/enums';
+import { AccountType } from '@prisma/client';
 
 @Injectable()
 export class AccountRulesFactory {

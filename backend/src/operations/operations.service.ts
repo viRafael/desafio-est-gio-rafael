@@ -3,7 +3,7 @@ import { PrismaService } from '../common/prisma/prisma.service';
 import { AccountRulesFactory } from './rules/account-rules.factory';
 import { AccountNotFoundException } from '../common/exceptions/account-not-found.exception';
 import { InvalidAccountException } from '../common/exceptions/invalid-account.exception';
-import { TransactionType } from 'generated/client/client';
+import { TransactionType } from '@prisma/client';
 
 @Injectable()
 export class OperationsService {
