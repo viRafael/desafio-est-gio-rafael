@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏦 Agilize Bank — Technical Challenge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">🏦</span>
+        <h1>Agilize<span>Bank</span></h1>
+      </div>
+      <p class="subtitle">Desafio Técnico — Estágio em Tecnologia</p>
+    </header>
+
+    <div id="message-area"></div>
+
+    <main class="app-content">
+      <section class="left-panel">
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2>Your Accounts</h2>
+            <span class="panel-sub">Select one to operate</span>
+          </div>
+          <div id="accounts-list" class="accounts-grid">
+          </div>
+        </div>
+
+        <div class="panel-card mt-4">
+          <div class="panel-header">
+            <h2>New Account</h2>
+            <span class="panel-sub">Create a checking or savings account</span>
+          </div>
+          <form id="create-account-form" class="app-form">
+            <div class="form-group">
+              <label for="create-holder">Account Holder Name</label>
+              <input type="text" id="create-holder" placeholder="e.g. John Doe" required>
+            </div>
+            <div class="form-group">
+              <label for="create-type">Account Type</label>
+              <select id="create-type" required>
+                <option value="" disabled selected>Select...</option>
+                <option value="CHECKING">Checking (Corrente)</option>
+                <option value="SAVINGS">Savings (Poupança)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="create-initial-balance">Initial Balance (R$)</label>
+              <input type="number" id="create-initial-balance" placeholder="0.00" min="0" step="0.01" value="0" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="right-panel">
+        <div id="active-account-info" class="active-account-card">
+          <p class="empty-state">No account selected.</p>
+        </div>
+
+        <div class="panel-card mt-4">
+          <div class="panel-header">
+            <h2>Operations</h2>
+            <span class="panel-sub">Withdraw or Transfer from the active account</span>
+          </div>
+          
+          <div class="operations-container">
+            <div class="operation-block">
+              <h3>💸 Withdrawal</h3>
+              <form id="withdraw-form" class="app-form">
+                <div class="form-group">
+                  <label for="withdraw-amount">Amount (R$)</label>
+                  <input type="number" id="withdraw-amount" placeholder="0.00" min="0.01" step="0.01" required>
+                </div>
+                <button type="submit" id="withdraw-form-btn" class="btn btn-action" disabled>Withdraw</button>
+              </form>
+            </div>
+
+            <div class="operation-block">
+              <h3>🔄 Transfer</h3>
+              <form id="transfer-form" class="app-form">
+                <div class="form-group">
+                  <label for="transfer-destination">Destination Account</label>
+                  <select id="transfer-destination" required>
+                    <option value="" disabled selected>Select destination account...</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="transfer-amount">Amount (R$)</label>
+                  <input type="number" id="transfer-amount" placeholder="0.00" min="0.01" step="0.01" required>
+                </div>
+                <button type="submit" id="transfer-form-btn" class="btn btn-action" disabled>Transfer</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-card mt-4">
+          <div class="panel-header">
+            <h2>Account Statement</h2>
+            <span class="panel-sub">History of deposits, withdrawals and transfers</span>
+          </div>
+          <div id="statement-list">
+            <p class="empty-state">No transactions recorded yet.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>&copy; 2026 Agilize Bank. Todos os direitos reservados. Desafio Técnico.</p>
+    </footer>
+  </div>
+</body>
+</html>
